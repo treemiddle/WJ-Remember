@@ -50,7 +50,7 @@ dependencies {
     kapt remote.hilt.android_compiler
     kapt remote.hilt.hilt_compiler
 
-    implementation remote.retrofit.version
+    api remote.retrofit.version
     implementation remote.retrofit.adapter
     implementation remote.retrofit.gson
 

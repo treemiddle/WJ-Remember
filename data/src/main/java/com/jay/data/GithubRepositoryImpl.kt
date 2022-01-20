@@ -4,15 +4,20 @@ import com.jay.data.mapper.DataGithubMapper
 import com.jay.data.remote.GithubRemoteDataSource
 import com.jay.domain.model.DomainUser
 import com.jay.domain.repository.GithubRepository
+import io.reactivex.Flowable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class GithubRepositoryImpl(
+class GithubRepositoryImpl @Inject constructor(
     private val remoteDataSource: GithubRemoteDataSource
 ) : GithubRepository {
 
-    override fun searchUser(searchName: String): Single<List<DomainUser>> {
+    override fun searchUser(searchName: String): Flowable<List<DomainUser>> {
         return remoteDataSource.searchUser(searchName)
-            .map { it.map(DataGithubMapper::mapToDomain) }
+            .flatMapPublisher {
+                Single.just(it.map(DataGithubMapper::mapToDomain))
+                    .toFlowable()
+            }
     }
 
 }

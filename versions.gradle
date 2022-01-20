@@ -11,12 +11,12 @@ ext {
             compile_sdk_version: 32,
 
             androidx           : [
-                    core_ktx        : '1.7.0',
-                    appcompat       : '1.4.1',
-                    material        : '1.5.0',
-                    constraintlayout: '2.1.3',
-                    lifecycle       : '2.4.0-rc01',
-                    fragment_ktx : '1.4.0'
+                    core_ktx         : '1.7.0',
+                    appcompat        : '1.4.1',
+                    material         : '1.5.0',
+                    constraintlayout : '2.1.3',
+                    lifecycle        : '2.4.0',
+                    activity_fragment: '1.4.0'
             ],
 
             test               : [
@@ -78,7 +78,8 @@ ext {
                     livedata_ktx    : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidx.lifecycle",
                     viewmodel_ktx   : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidx.lifecycle",
                     multidex        : "androidx.multidex:multidex:$versions.multidex_version",
-                    fragment_ktx: "androidx.fragment:fragment-ktx:$versions.fragment_ktx"
+                    fragment_ktx    : "androidx.fragment:fragment-ktx:$versions.activity_fragment",
+                    activity_ktx    : "androidx.activity:activity-ktx:$versions.activity_fragment"
             ],
             glide   : [
                     glide     : "com.github.bumptech.glide:glide:$versions.glide",

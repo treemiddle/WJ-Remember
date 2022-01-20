@@ -1,4 +1,4 @@
-package com.jay.wj_remember
+package com.jay.wj_remember.ui.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,4 +25,5 @@ abstract class BaseViewModel : ViewModel() {
         compositeDisposable.clear()
         super.onCleared()
     }
+
 }

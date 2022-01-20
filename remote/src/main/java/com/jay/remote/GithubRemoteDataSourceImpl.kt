@@ -5,8 +5,9 @@ import com.jay.data.remote.GithubRemoteDataSource
 import com.jay.remote.api.GithubApi
 import com.jay.remote.mapper.GithubRemoteMapper
 import io.reactivex.Single
+import javax.inject.Inject
 
-class GithubRemoteDataSourceImpl(private val githubApi: GithubApi) : GithubRemoteDataSource {
+class GithubRemoteDataSourceImpl @Inject constructor(private val githubApi: GithubApi) : GithubRemoteDataSource {
 
     override fun searchUser(searchName: String): Single<List<DataUser>> {
         return githubApi.searchUser(searchName)

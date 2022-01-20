@@ -1,9 +1,12 @@
 package com.jay.wj_remember.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.jay.common.makeLog
 import com.jay.domain.usecase.GithubUseCase
 import com.jay.wj_remember.mapper.Mapper
 import com.jay.wj_remember.ui.base.BaseViewModel
+import com.jay.wj_remember.utils.FragmentType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -21,6 +24,11 @@ class MainViewModel @Inject constructor(
 
     private val _searchClick = PublishSubject.create<Unit>()
     private val _querySubject = BehaviorSubject.createDefault("")
+    private val _tabPositionSubject = BehaviorSubject.create<Int>()
+
+    private val _fragmentType = MutableLiveData<FragmentType>()
+    val fragmentType: LiveData<FragmentType>
+        get() = _fragmentType
 
     init {
         val button = _searchClick.throttleFirst(1, TimeUnit.SECONDS)
@@ -41,12 +49,28 @@ class MainViewModel @Inject constructor(
                 .map { it.map(Mapper::mapToPresentation) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { hideLoading() }
-                .subscribe { makeLog(javaClass.simpleName, "ok: $it") }
+                .subscribe { makeLog(javaClass.simpleName, "ok: $it") },
+
+            _tabPositionSubject.distinctUntilChanged()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(::fromPositionToFragmentType)
         )
     }
 
     fun debounceQuery(query: String) = _querySubject.onNext(query)
 
     fun searchClick() = _searchClick.onNext(Unit)
+
+    fun setTabPosition(position: Int?) {
+        position?.let { _tabPositionSubject.onNext(it) }
+    }
+
+    private fun fromPositionToFragmentType(fragmentType: Int) {
+        if (fragmentType == 0) {
+            _fragmentType.value = FragmentType.API
+        } else {
+            _fragmentType.value = FragmentType.LOCAL
+        }
+    }
 
 }

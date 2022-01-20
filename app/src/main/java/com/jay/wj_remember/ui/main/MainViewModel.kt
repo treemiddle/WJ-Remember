@@ -6,6 +6,7 @@ import com.jay.common.makeLog
 import com.jay.domain.usecase.GithubUseCase
 import com.jay.wj_remember.mapper.Mapper
 import com.jay.wj_remember.ui.base.BaseViewModel
+import com.jay.wj_remember.utils.Event
 import com.jay.wj_remember.utils.FragmentType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.BackpressureStrategy
@@ -26,8 +27,8 @@ class MainViewModel @Inject constructor(
     private val _querySubject = BehaviorSubject.createDefault("")
     private val _tabPositionSubject = BehaviorSubject.create<Int>()
 
-    private val _fragmentType = MutableLiveData<FragmentType>()
-    val fragmentType: LiveData<FragmentType>
+    private val _fragmentType = MutableLiveData<Event<FragmentType>>()
+    val fragmentType: LiveData<Event<FragmentType>>
         get() = _fragmentType
 
     init {
@@ -67,9 +68,9 @@ class MainViewModel @Inject constructor(
 
     private fun fromPositionToFragmentType(fragmentType: Int) {
         if (fragmentType == 0) {
-            _fragmentType.value = FragmentType.API
+            _fragmentType.value = Event(FragmentType.API)
         } else {
-            _fragmentType.value = FragmentType.LOCAL
+            _fragmentType.value = Event(FragmentType.LOCAL)
         }
     }
 

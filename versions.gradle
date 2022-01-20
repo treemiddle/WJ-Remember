@@ -53,7 +53,9 @@ ext {
                     hilt_compiler        : '1.0.0'
             ],
 
-            multidex_version   : '2.0.1'
+            multidex_version   : '2.0.1',
+
+            swipe_layout       : '1.1.0'
     ]
 
     deps = [
@@ -79,7 +81,8 @@ ext {
                     viewmodel_ktx   : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidx.lifecycle",
                     multidex        : "androidx.multidex:multidex:$versions.multidex_version",
                     fragment_ktx    : "androidx.fragment:fragment-ktx:$versions.activity_fragment",
-                    activity_ktx    : "androidx.activity:activity-ktx:$versions.activity_fragment"
+                    activity_ktx    : "androidx.activity:activity-ktx:$versions.activity_fragment",
+                    swipe_layout    : "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swipe_layout"
             ],
             glide   : [
                     glide     : "com.github.bumptech.glide:glide:$versions.glide",

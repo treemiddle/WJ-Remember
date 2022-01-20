@@ -37,10 +37,13 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel>(
 
         setupBinding()
         setupObserving()
+        setupViews()
     }
 
     abstract fun setupBinding()
 
     abstract fun setupObserving()
+
+    abstract fun setupViews()
 
 }

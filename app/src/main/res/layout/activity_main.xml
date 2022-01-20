@@ -34,10 +34,10 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
+            setTabItemListener="@{vm}"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:layout_marginTop="@dimen/dp_16"
-            setTabItemListener="@{vm}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -46,6 +46,7 @@
             android:id="@+id/ctl_search"
             android:layout_width="0dp"
             android:layout_height="60dp"
+            android:background="@drawable/bg_query_search"
             android:padding="@dimen/dp_8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

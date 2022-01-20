@@ -12,7 +12,8 @@ object Mapper : PresentationMapper<DomainModel, PresentationModel> {
         return User(
             name = from.name,
             image = from.image,
-            hasLiked = from.hasLiked
+            hasLiked = from.hasLiked,
+            header = from.header
         )
     }
 

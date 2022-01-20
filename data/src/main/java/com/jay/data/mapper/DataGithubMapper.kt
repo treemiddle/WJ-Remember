@@ -9,7 +9,8 @@ object DataGithubMapper : DataMapper<DataModel, DomainModel> {
     override fun mapToDomain(from: DataModel): DomainModel {
         return DomainModel(
             name = from.name,
-            image = from.image
+            image = from.image,
+            header = from.header
         )
     }
 
@@ -17,7 +18,8 @@ object DataGithubMapper : DataMapper<DataModel, DomainModel> {
         return DataUser(
             name = from.name,
             image = from.image,
-            hasLiked = from.hasLiked
+            hasLiked = from.hasLiked,
+            header = from.header
         )
     }
 

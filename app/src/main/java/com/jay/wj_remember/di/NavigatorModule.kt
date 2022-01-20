@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-abstract class MainModule {
+abstract class NavigatorModule {
 
     @Binds
     abstract fun bindMainNavigator(impl: AppNavigatorImpl): AppNavigator

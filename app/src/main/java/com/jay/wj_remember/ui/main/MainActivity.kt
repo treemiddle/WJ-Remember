@@ -27,8 +27,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun setupObserving() = with(viewModel) {
-        fragmentType.observe(this@MainActivity, { type ->
-            navigator.navigateTo(type)
+        fragmentType.observe(this@MainActivity, {
+            it.getContentIfNotHandled()?.let { type ->
+                navigator.navigateTo(type)
+            }
         })
     }
 

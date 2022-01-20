@@ -60,6 +60,8 @@ dependencies {
 //    implementation app.androidx.viewmodel_ktx
 //    implementation app.androidx.fragment_ktx
 //    implementation app.androidx.activity_ktx
+    implementation app.androidx.swipe_layout
+
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"

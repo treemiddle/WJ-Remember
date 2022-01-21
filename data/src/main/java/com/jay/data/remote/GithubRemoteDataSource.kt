@@ -5,6 +5,6 @@ import io.reactivex.Single
 
 interface GithubRemoteDataSource {
 
-    fun searchUser(searchName: String): Single<List<DataUser>>
+    fun searchUser(name: String): Single<List<DataUser>>
 
 }

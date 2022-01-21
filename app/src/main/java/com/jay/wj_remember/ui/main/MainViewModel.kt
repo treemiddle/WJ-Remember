@@ -9,8 +9,7 @@ import com.jay.wj_remember.ui.base.BaseViewModel
 import com.jay.wj_remember.utils.Event
 import com.jay.wj_remember.utils.FragmentType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
@@ -25,7 +24,7 @@ class MainViewModel @Inject constructor(
 
     private val _searchClick = PublishSubject.create<Unit>()
     private val _querySubject = BehaviorSubject.createDefault("")
-    private val _tabPositionSubject = BehaviorSubject.create<Int>()
+    private val _tabPositionSubject = BehaviorSubject.createDefault(0)
 
     private val _fragmentType = MutableLiveData<Event<FragmentType>>()
     val fragmentType: LiveData<Event<FragmentType>>
@@ -34,17 +33,23 @@ class MainViewModel @Inject constructor(
     init {
         val button = _searchClick.throttleFirst(1, TimeUnit.SECONDS)
             .map { _querySubject.value }
-            .toFlowable(BackpressureStrategy.DROP)
         val query = _querySubject.debounce(1500, TimeUnit.MILLISECONDS)
-            .toFlowable(BackpressureStrategy.DROP)
 
         compositeDisposable.addAll(
-            Flowable.merge(button, query)
+            Observable.merge(button, query)
                 .filter { it.length >= 2 }
                 .distinctUntilChanged()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { showLoading() }
-                .switchMap(githubUseCase::searchUser)
+                .switchMapSingle { name ->
+                    if (_tabPositionSubject.value == 0) {
+                        githubUseCase.searchApiUsers(name)
+                            .subscribeOn(Schedulers.io())
+                    } else {
+                        githubUseCase.searchLocalUsers(name)
+                            .subscribeOn(Schedulers.io())
+                    }
+                }
                 .onErrorReturn { listOf() }
                 .observeOn(Schedulers.computation())
                 .map { it.map(Mapper::mapToPresentation) }

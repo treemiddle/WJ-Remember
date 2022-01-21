@@ -1,10 +1,17 @@
 package com.jay.domain.repository
 
 import com.jay.domain.model.DomainUser
-import io.reactivex.Flowable
+import io.reactivex.Completable
+import io.reactivex.Single
 
 interface GithubRepository {
 
-    fun searchUser(searchName: String): Flowable<List<DomainUser>>
+    fun searchApiUsers(name: String): Single<List<DomainUser>>
+
+    fun searchLocalUsers(name: String): Single<List<DomainUser>>
+
+    fun saveUser(user: DomainUser): Completable
+
+    fun deleteUser(user: DomainUser): Completable
 
 }

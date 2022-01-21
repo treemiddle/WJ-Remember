@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class GithubRemoteDataSourceImpl @Inject constructor(private val githubApi: GithubApi) : GithubRemoteDataSource {
 
-    override fun searchUser(searchName: String): Single<List<DataUser>> {
-        return githubApi.searchUser(searchName)
+    override fun searchUser(name: String): Single<List<DataUser>> {
+        return githubApi.searchUser(name)
             .map { it.items?.map(GithubRemoteMapper::mapToData) }
     }
 

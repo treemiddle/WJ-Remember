@@ -10,7 +10,7 @@ interface GithubApi {
 
     @GET("search/users")
     fun searchUser(
-        @Query("q") searchName: String,
+        @Query("q") name: String,
         @Query("per_page") per_page: Int = 100,
         @Query("order") sort: String = "asc"
     ): Single<GithubReponse<UserInfo>>

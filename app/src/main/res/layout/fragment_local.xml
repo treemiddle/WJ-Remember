@@ -14,9 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<!--        setUserList="@{vm.localUserList}"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/local_user_rv"
-            setUserList="@{vm.localUserList}"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

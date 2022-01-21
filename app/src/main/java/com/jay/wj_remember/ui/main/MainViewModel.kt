@@ -3,13 +3,16 @@ package com.jay.wj_remember.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jay.common.makeLog
+import com.jay.domain.model.DomainUser
 import com.jay.domain.usecase.GithubUseCase
 import com.jay.wj_remember.mapper.Mapper
+import com.jay.wj_remember.model.User
 import com.jay.wj_remember.ui.base.BaseViewModel
 import com.jay.wj_remember.utils.Event
 import com.jay.wj_remember.utils.FragmentType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
@@ -30,6 +33,14 @@ class MainViewModel @Inject constructor(
     val fragmentType: LiveData<Event<FragmentType>>
         get() = _fragmentType
 
+    private val _apiUserList = MutableLiveData<List<User>>()
+    val apiUserList: LiveData<List<User>>
+        get() = _apiUserList
+
+    private val _localUserList = MutableLiveData<List<User>>()
+    val localUserList: LiveData<List<User>>
+        get() = _localUserList
+
     init {
         val button = _searchClick.throttleFirst(1, TimeUnit.SECONDS)
             .map { _querySubject.value }
@@ -42,20 +53,24 @@ class MainViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { showLoading() }
                 .switchMapSingle { name ->
-                    if (_tabPositionSubject.value == 0) {
-                        githubUseCase.searchApiUsers(name)
-                            .subscribeOn(Schedulers.io())
-                    } else {
-                        githubUseCase.searchLocalUsers(name)
-                            .subscribeOn(Schedulers.io())
+                    rxSwitchMapFromTabPosition(name)
+                        .subscribeOn(Schedulers.io())
+                }
+                .observeOn(Schedulers.computation())
+                .map {
+                    it.map(Mapper::mapToPresentation).map { user ->
+                        user.apply {
+                            positionType = _tabPositionSubject.value!!
+                        }
                     }
                 }
-                .onErrorReturn { listOf() }
-                .observeOn(Schedulers.computation())
-                .map { it.map(Mapper::mapToPresentation) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { hideLoading() }
-                .subscribe { makeLog(javaClass.simpleName, "ok: $it") },
+                .onErrorReturn { listOf() }
+                .subscribe { userList ->
+                    makeLog(javaClass.simpleName, "ok: $userList")
+                    setUserList(userList)
+                },
 
             _tabPositionSubject.distinctUntilChanged()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -76,6 +91,22 @@ class MainViewModel @Inject constructor(
             _fragmentType.value = Event(FragmentType.API)
         } else {
             _fragmentType.value = Event(FragmentType.LOCAL)
+        }
+    }
+
+    private fun rxSwitchMapFromTabPosition(name: String): Single<List<DomainUser>> {
+        return if (_tabPositionSubject.value == 0) {
+            githubUseCase.searchApiUsers(name)
+        } else {
+            githubUseCase.searchLocalUsers(name)
+        }
+    }
+
+    private fun setUserList(userList: List<User>) {
+        if (_tabPositionSubject.value == 0) {
+            _apiUserList.value = userList
+        } else {
+            _localUserList.value = userList
         }
     }
 

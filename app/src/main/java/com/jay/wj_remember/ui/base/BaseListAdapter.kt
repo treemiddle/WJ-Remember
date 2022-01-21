@@ -20,4 +20,8 @@ abstract class BaseListAdapter<T> :
         holder.bind(currentList[position])
     }
 
+    override fun onViewRecycled(holder: BaseViewHolder<T>) {
+        holder.recycle()
+    }
+
 }

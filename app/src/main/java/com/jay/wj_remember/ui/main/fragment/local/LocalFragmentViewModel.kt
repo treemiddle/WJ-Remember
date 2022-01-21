@@ -22,14 +22,16 @@ class LocalFragmentViewModel @Inject constructor() : BaseViewModel() {
                         name = "local user: $i",
                         image = null,
                         hasLiked = true,
-                        header = true
+                        header = true,
+                        id = i.toLong()
                     )
                 } else {
                     User(
                         name = "local user: $i",
                         image = null,
                         hasLiked = false,
-                        header = false
+                        header = false,
+                        id = i.toLong()
                     )
                 }
 

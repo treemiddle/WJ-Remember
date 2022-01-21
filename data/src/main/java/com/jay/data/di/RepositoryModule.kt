@@ -1,6 +1,7 @@
 package com.jay.data.di
 
 import com.jay.data.GithubRepositoryImpl
+import com.jay.data.local.GithubLocalDataSource
 import com.jay.data.remote.GithubRemoteDataSource
 import com.jay.domain.repository.GithubRepository
 import dagger.Module
@@ -16,9 +17,13 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideGithubRepository(
-        githubRemoteDataSource: GithubRemoteDataSource
-    ) : GithubRepository {
-        return GithubRepositoryImpl(githubRemoteDataSource)
+        githubRemoteDataSource: GithubRemoteDataSource,
+        githubLocalDataSource: GithubLocalDataSource
+    ): GithubRepository {
+        return GithubRepositoryImpl(
+            githubRemoteDataSource,
+            githubLocalDataSource
+        )
     }
 
 }

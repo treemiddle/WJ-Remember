@@ -10,7 +10,8 @@ object DataGithubMapper : DataMapper<DataModel, DomainModel> {
         return DomainModel(
             name = from.name,
             image = from.image,
-            header = from.header
+            header = from.header,
+            id = from.id
         )
     }
 
@@ -19,7 +20,8 @@ object DataGithubMapper : DataMapper<DataModel, DomainModel> {
             name = from.name,
             image = from.image,
             hasLiked = from.hasLiked,
-            header = from.header
+            header = from.header,
+            id = from.id
         )
     }
 

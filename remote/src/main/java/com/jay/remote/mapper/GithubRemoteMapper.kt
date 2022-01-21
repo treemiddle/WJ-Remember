@@ -9,7 +9,8 @@ object GithubRemoteMapper : RemoteMapper<RemoteModel, DataModel> {
     override fun mapToData(from: RemoteModel): DataUser {
         return DataUser(
             name = from.login,
-            image = from.avatar_url
+            image = from.avatar_url,
+            id = from.id
         )
     }
 

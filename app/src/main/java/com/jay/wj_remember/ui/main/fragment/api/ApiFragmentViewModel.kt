@@ -22,14 +22,16 @@ class ApiFragmentViewModel @Inject constructor() : BaseViewModel() {
                         name = "api user: $i",
                         image = null,
                         hasLiked = true,
-                        header = true
+                        header = true,
+                        id = i.toLong()
                     )
                 } else {
                     User(
                         name = "api user: $i",
                         image = null,
                         hasLiked = false,
-                        header = false
+                        header = false,
+                        id = i.toLong()
                     )
                 }
 

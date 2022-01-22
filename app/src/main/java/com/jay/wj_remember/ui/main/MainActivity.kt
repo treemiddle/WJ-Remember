@@ -6,6 +6,7 @@ import com.jay.wj_remember.R
 import com.jay.wj_remember.databinding.ActivityMainBinding
 import com.jay.wj_remember.ui.base.BaseActivity
 import com.jay.wj_remember.ui.main.navigator.AppNavigator
+import com.jay.wj_remember.utils.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,10 +28,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun setupObserving() = with(viewModel) {
-        fragmentType.observe(this@MainActivity, {
-            it.getContentIfNotHandled()?.let { type ->
-                navigator.navigateTo(type)
-            }
+        fragmentType.observe(this@MainActivity, EventObserver {
+            navigator.navigateTo(it)
         })
     }
 

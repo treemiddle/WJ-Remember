@@ -1,6 +1,7 @@
 package com.jay.wj_remember.ui.main.fragment.local
 
 import androidx.fragment.app.viewModels
+import com.jay.common.makeLog
 import com.jay.wj_remember.R
 import com.jay.wj_remember.databinding.FragmentLocalBinding
 import com.jay.wj_remember.ui.base.BaseFragment
@@ -30,11 +31,6 @@ class LocalFragment : BaseFragment<FragmentLocalBinding, LocalFragmentViewModel>
 
         }
         with(activityViewModel) {
-            fragmentType.observe(viewLifecycleOwner, {
-                if (it.peekContent() == FragmentType.LOCAL) {
-                    //viewModel.call()
-                }
-            })
             localUserList.observe(viewLifecycleOwner, {
                 viewModel.setLocalUserList(it)
             })

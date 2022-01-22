@@ -19,5 +19,6 @@ data class UserInfo(
     val starred_url: String,
     val subscriptions_url: String,
     val type: String,
-    val url: String
+    val url: String,
+    var header: String? = null
 ) : RemoteModel

@@ -10,7 +10,8 @@ object GithubRemoteMapper : RemoteMapper<RemoteModel, DataModel> {
         return DataUser(
             name = from.login,
             image = from.avatar_url,
-            id = from.id
+            id = from.id,
+            header = from.header
         )
     }
 

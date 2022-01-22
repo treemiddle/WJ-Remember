@@ -10,13 +10,13 @@ import com.jay.wj_remember.utils.ext.loadImage
 import com.jay.wj_remember.utils.getProgressDrawable
 
 @BindingAdapter("setUserHeader")
-fun bindUserHeader(tv: TextView, header: Boolean) {
-    if (header) {
-        tv.visibility = View.VISIBLE
-        tv.text = "ㅇ"
-    } else {
+fun bindUserHeader(tv: TextView, header: String?) {
+    if (header.isNullOrEmpty()) {
         tv.visibility = View.GONE
         tv.text = null
+    } else {
+        tv.visibility = View.VISIBLE
+        tv.text = header
     }
 }
 

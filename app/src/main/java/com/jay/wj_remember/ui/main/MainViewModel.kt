@@ -49,7 +49,7 @@ class MainViewModel @Inject constructor(
         compositeDisposable.addAll(
             Observable.merge(button, query)
                 .filter { it.length >= 2 }
-                .distinctUntilChanged()
+                //.distinctUntilChanged()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { showLoading() }
                 .switchMapSingle { name ->

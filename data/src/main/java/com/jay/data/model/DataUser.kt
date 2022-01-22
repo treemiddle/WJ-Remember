@@ -5,5 +5,5 @@ data class DataUser(
     val name: String,
     val image: String?,
     var hasLiked: Boolean = false,
-    var header: Boolean = false
+    var header: String? = null
 ) : DataModel

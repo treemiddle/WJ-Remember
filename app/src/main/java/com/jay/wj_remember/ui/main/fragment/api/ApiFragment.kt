@@ -30,11 +30,6 @@ class ApiFragment : BaseFragment<FragmentApiBinding, ApiFragmentViewModel>(R.lay
 
         }
         with(activityViewModel) {
-            fragmentType.observe(viewLifecycleOwner, {
-                if (it.peekContent() == FragmentType.API) {
-                    //viewModel.call()
-                }
-            })
             apiUserList.observe(viewLifecycleOwner, {
                 viewModel.setApiUserList(it)
             })

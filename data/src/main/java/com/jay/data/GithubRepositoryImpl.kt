@@ -1,5 +1,6 @@
 package com.jay.data
 
+import com.jay.common.makeLog
 import com.jay.data.local.GithubLocalDataSource
 import com.jay.data.mapper.DataGithubMapper
 import com.jay.data.model.DataUser
@@ -47,7 +48,5 @@ class GithubRepositoryImpl @Inject constructor(
     override fun deleteUser(user: DomainUser): Completable {
         return localDataSource.deleteUserLike(DataGithubMapper.mapToData(user))
     }
-
-
 
 }

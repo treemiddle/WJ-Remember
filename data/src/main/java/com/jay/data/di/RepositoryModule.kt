@@ -1,9 +1,11 @@
 package com.jay.data.di
 
 import com.jay.data.GithubRepositoryImpl
-import com.jay.data.local.GithubLocalDataSource
+import com.jay.data.LocalRepositoryImpl
+import com.jay.data.local.UserLocalDataSource
 import com.jay.data.remote.GithubRemoteDataSource
 import com.jay.domain.repository.GithubRepository
+import com.jay.domain.repository.LocalRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,12 +20,20 @@ object RepositoryModule {
     @Singleton
     fun provideGithubRepository(
         githubRemoteDataSource: GithubRemoteDataSource,
-        githubLocalDataSource: GithubLocalDataSource
+        userLocalDataSource: UserLocalDataSource
     ): GithubRepository {
         return GithubRepositoryImpl(
             githubRemoteDataSource,
-            githubLocalDataSource
+            userLocalDataSource
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalRepository(
+        userLocalDataSource: UserLocalDataSource
+    ) : LocalRepository {
+        return LocalRepositoryImpl(userLocalDataSource)
     }
 
 }

@@ -16,9 +16,7 @@ class LocalFragment : BaseFragment<FragmentLocalBinding, LocalFragmentViewModel>
 
     private val userAdapter by lazy {
         UserAdapter { user, position ->
-            if (user.positionType == 1) {
-                viewModel.localclick(user, position)
-            }
+            viewModel.onClickUser(user, position)
         }
     }
 

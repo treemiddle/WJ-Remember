@@ -40,4 +40,5 @@ class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivit
             }
         }
     }
+
 }

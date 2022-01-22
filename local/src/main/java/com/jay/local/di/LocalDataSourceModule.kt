@@ -1,7 +1,7 @@
 package com.jay.local.di
 
-import com.jay.data.local.GithubLocalDataSource
-import com.jay.local.GithubLocalDataSourceImpl
+import com.jay.data.local.UserLocalDataSource
+import com.jay.local.UserLocalDataSourceImpl
 import com.jay.local.dao.UserDao
 import dagger.Module
 import dagger.Provides
@@ -17,8 +17,8 @@ object LocalDataSourceModule {
     @Singleton
     fun provideGithubLocalDataSource(
         userDao: UserDao
-    ): GithubLocalDataSource {
-        return GithubLocalDataSourceImpl(userDao)
+    ): UserLocalDataSource {
+        return UserLocalDataSourceImpl(userDao)
     }
 
 }

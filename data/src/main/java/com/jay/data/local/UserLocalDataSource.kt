@@ -4,7 +4,7 @@ import com.jay.data.model.DataUser
 import io.reactivex.Completable
 import io.reactivex.Single
 
-interface GithubLocalDataSource {
+interface UserLocalDataSource {
 
     fun getUserLike(id: Long): Single<DataUser>
 

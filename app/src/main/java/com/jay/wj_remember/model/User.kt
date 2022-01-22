@@ -5,6 +5,5 @@ data class User(
     val name: String,
     val image: String?,
     val header: String? = null,
-    var hasLiked: Boolean = false,
-    var positionType: Int = 0
+    var hasLiked: Boolean = false
 ) : PresentationModel

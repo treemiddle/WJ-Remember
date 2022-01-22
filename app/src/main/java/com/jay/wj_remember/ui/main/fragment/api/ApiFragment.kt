@@ -5,7 +5,6 @@ import com.jay.wj_remember.R
 import com.jay.wj_remember.databinding.FragmentApiBinding
 import com.jay.wj_remember.ui.base.BaseFragment
 import com.jay.wj_remember.ui.main.fragment.UserAdapter
-import com.jay.wj_remember.utils.FragmentType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,9 +14,7 @@ class ApiFragment : BaseFragment<FragmentApiBinding, ApiFragmentViewModel>(R.lay
 
     private val userAdapter by lazy {
         UserAdapter { user, position ->
-            if (user.positionType == 0) {
-                viewModel.apiclick(user, position)
-            }
+            viewModel.onClickUser(user, position)
         }
     }
 

@@ -2,7 +2,6 @@ package com.jay.wj_remember.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.jay.common.makeLog
 import com.jay.domain.model.DomainUser
 import com.jay.domain.usecase.GithubUseCase
 import com.jay.wj_remember.mapper.Mapper
@@ -20,6 +19,9 @@ import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+/**
+ * MainActivity에 있는 event들의 로직들을 처리
+ */
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val githubUseCase: GithubUseCase
@@ -57,20 +59,11 @@ class MainViewModel @Inject constructor(
                         .subscribeOn(Schedulers.io())
                 }
                 .observeOn(Schedulers.computation())
-                .map {
-                    it.map(Mapper::mapToPresentation).map { user ->
-                        user.apply {
-                            positionType = _tabPositionSubject.value!!
-                        }
-                    }
-                }
+                .map { it.map(Mapper::mapToPresentation) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { hideLoading() }
                 .onErrorReturn { listOf() }
-                .subscribe { userList ->
-                    makeLog(javaClass.simpleName, "ok: $userList")
-                    setUserList(userList)
-                },
+                .subscribe { userList -> setUserList(userList) },
 
             _tabPositionSubject.distinctUntilChanged()
                 .observeOn(AndroidSchedulers.mainThread())

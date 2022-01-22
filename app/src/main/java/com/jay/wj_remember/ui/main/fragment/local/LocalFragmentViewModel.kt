@@ -3,6 +3,7 @@ package com.jay.wj_remember.ui.main.fragment.local
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jay.common.makeLog
+import com.jay.domain.usecase.CreateUseCase
 import com.jay.domain.usecase.LocalUseCase
 import com.jay.wj_remember.mapper.Mapper
 import com.jay.wj_remember.model.User
@@ -13,9 +14,13 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+/**
+ * LocalFragment에 있는 event들의 비지니스 로직들을 각 usecase에 요청
+ */
 @HiltViewModel
 class LocalFragmentViewModel @Inject constructor(
-    private val localUseCase: LocalUseCase
+    private val localUseCase: LocalUseCase,
+    private val createUseCase: CreateUseCase
 ) : BaseViewModel() {
 
     private val _localUserList = MutableLiveData<List<User>>()
@@ -26,25 +31,28 @@ class LocalFragmentViewModel @Inject constructor(
         _localUserList.value = userList
     }
 
-    fun localclick(user: User, position: Int) {
+    fun onClickUser(user: User, position: Int) {
         localUseCase.deleteUserLike(Mapper.mapToDomain(user))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                makeLog(javaClass.simpleName, "삭제 성공")
-                setNewList(position)
+                submitList(position)
             }, { t ->
-                makeLog(javaClass.simpleName, "삭제 실패: ${t.localizedMessage}")
+                makeLog(javaClass.simpleName, "local delete fail: ${t.localizedMessage}")
             }).addTo(compositeDisposable)
     }
 
-    private fun setNewList(position: Int) {
-        val newList = mutableListOf<User>().apply {
-            addAll(_localUserList.value!!)
-            removeAt(position)
-        }
+    private fun submitList(position: Int) {
+        val newList = removeAtIndexFromList(position)
 
         setLocalUserList(newList)
+    }
+
+    private fun removeAtIndexFromList(position: Int): List<User> {
+        return createUseCase.removeAtDomainList(
+            userList = _localUserList.value!!.map(Mapper::mapToDomain),
+            position = position
+        ).map(Mapper::mapToPresentation)
     }
 
 }

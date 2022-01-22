@@ -18,7 +18,7 @@ interface UserDao {
     @Delete
     fun deleteUserLike(user: LocalEntity): Completable
 
-    @Query("SELECT * FROM user WHERE name LIKE '%' || :name || '%'")
+    @Query("SELECT * FROM user WHERE name LIKE '%' || :name || '%' ORDER BY name ASC")
     fun getUserFromName(name: String): Single<List<LocalEntity>>
 
 }

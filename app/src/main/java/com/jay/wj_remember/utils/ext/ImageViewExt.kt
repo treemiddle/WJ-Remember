@@ -9,6 +9,7 @@ import com.jay.wj_remember.R
 fun ImageView.loadImage(path: String?, circularProgress: CircularProgressDrawable) {
     Glide.with(context)
         .load(path)
+        .circleCrop()
         .apply(
             RequestOptions()
                 .placeholder(circularProgress)

@@ -8,12 +8,15 @@ import com.jay.remote.model.UserInfo
 import io.reactivex.Single
 import javax.inject.Inject
 
+/**
+ * Remote(API)에서 받아온 결과 값을 Data Layer로 매핑하여 내려줌
+ */
 class GithubRemoteDataSourceImpl @Inject constructor(private val githubApi: GithubApi) : GithubRemoteDataSource {
 
     /**
      * [in:login] kenya in:login matches users with the word "kenya" in their username.
      * [in:name] bolton in:name matches users whose real name contains the word "bolton.
-     * 사용자 이름으로 제한이 실제 이름으로 제한인지 유저의 이름으로 제한인지 몰라 두 가지 경우 적용(물어보지 못한 이유 주말)
+     * 사용자 이름으로 제한이 실제 이름으로 제한인지 유저의 이름으로 제한인지 몰라 두 가지 경우 모두 구현
      * name기준으로 적용 시 실제 login name과 다른 경우도 있음
      */
     override fun searchUser(name: String): Single<List<DataUser>> {

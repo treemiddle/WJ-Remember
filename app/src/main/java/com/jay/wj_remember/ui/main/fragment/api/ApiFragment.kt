@@ -13,6 +13,14 @@ class ApiFragment : BaseFragment<FragmentApiBinding, ApiFragmentViewModel>(R.lay
 
     override val viewModel: ApiFragmentViewModel by viewModels()
 
+    private val userAdapter by lazy {
+        UserAdapter { user, position ->
+            if (user.positionType == 0) {
+                viewModel.apiclick(user, position)
+            }
+        }
+    }
+
     override fun setupBinding() {
         binding.vm = viewModel
     }
@@ -34,11 +42,7 @@ class ApiFragment : BaseFragment<FragmentApiBinding, ApiFragmentViewModel>(R.lay
     }
 
     override fun setupViews() = with(binding) {
-        apiUserRv.adapter = UserAdapter {
-            if (it.positionType == 0) {
-                viewModel.apiclick()
-            }
-        }
+        apiUserRv.adapter = userAdapter
     }
 
     companion object {

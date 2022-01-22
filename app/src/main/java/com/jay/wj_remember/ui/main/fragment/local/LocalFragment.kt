@@ -13,6 +13,14 @@ class LocalFragment : BaseFragment<FragmentLocalBinding, LocalFragmentViewModel>
 
     override val viewModel: LocalFragmentViewModel by viewModels()
 
+    private val userAdapter by lazy {
+        UserAdapter { user, position ->
+            if (user.positionType == 1) {
+                viewModel.localclick(user, position)
+            }
+        }
+    }
+
     override fun setupBinding() {
         binding.vm = viewModel
     }
@@ -34,11 +42,7 @@ class LocalFragment : BaseFragment<FragmentLocalBinding, LocalFragmentViewModel>
     }
 
     override fun setupViews() = with(binding) {
-        localUserRv.adapter = UserAdapter {
-            if (it.positionType == 1) {
-                viewModel.localclick()
-            }
-        }
+        localUserRv.adapter = userAdapter
     }
 
     companion object {

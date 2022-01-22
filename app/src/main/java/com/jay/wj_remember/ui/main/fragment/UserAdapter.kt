@@ -8,7 +8,7 @@ import com.jay.wj_remember.model.User
 import com.jay.wj_remember.ui.base.BaseListAdapter
 import com.jay.wj_remember.ui.base.BaseViewHolder
 
-typealias UserClick = (User) -> Unit
+typealias UserClick = (User, Int) -> Unit
 
 class UserAdapter(
     private val onItemClick: UserClick? = null
@@ -21,7 +21,7 @@ class UserAdapter(
             } else {
                 it.itemView.setOnClickListener { _ ->
                     val currentUser = currentList.getOrNull(it.adapterPosition) ?: return@setOnClickListener
-                    onItemClick.invoke(currentUser)
+                    onItemClick.invoke(currentUser, it.adapterPosition)
                 }
             }
         }

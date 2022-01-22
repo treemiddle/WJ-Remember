@@ -11,7 +11,8 @@ object DataGithubMapper : DataMapper<DataModel, DomainModel> {
             name = from.name,
             image = from.image,
             header = from.header,
-            id = from.id
+            id = from.id,
+            hasLiked = from.hasLiked
         )
     }
 

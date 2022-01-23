@@ -16,11 +16,16 @@ class GithubRemoteDataSourceImpl @Inject constructor(private val githubApi: Gith
     /**
      * [in:login] kenya in:login matches users with the word "kenya" in their username.
      * [in:name] bolton in:name matches users whose real name contains the word "bolton.
-     * 사용자 이름으로 제한이 실제 이름으로 제한인지 유저의 이름으로 제한인지 몰라 두 가지 경우 모두 구현
-     * name기준으로 적용 시 실제 login name과 다른 경우도 있음
+     * in:name -> github acoount name
+     * in:login -> user name
+     *
+     * in:name으로 처리 시 깃헙 계정과 이름이 다른 경우도 많아 API, LOCAL 화면에 다르게 나타나는 현상 많음
+     * (search user api는 login name으로 내려줌)
+     *
+     * 혹시 몰라 두 가지 모두 구현
      */
     override fun searchUser(name: String): Single<List<DataUser>> {
-        val newName = "$name+in:name"
+        //val newName = "$name+in:name"
         val newLogin = "$name+in:login"
 
         return githubApi.searchUser(newLogin)

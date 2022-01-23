@@ -46,7 +46,7 @@ class MainViewModel @Inject constructor(
     init {
         val button = _searchClick.throttleFirst(1, TimeUnit.SECONDS)
             .map { _querySubject.value }
-        val query = _querySubject.debounce(1500, TimeUnit.MILLISECONDS)
+        val query = _querySubject.debounce(1200, TimeUnit.MILLISECONDS)
 
         compositeDisposable.addAll(
             Observable.merge(button, query)

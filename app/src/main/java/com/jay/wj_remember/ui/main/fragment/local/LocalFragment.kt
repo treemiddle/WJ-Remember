@@ -1,12 +1,10 @@
 package com.jay.wj_remember.ui.main.fragment.local
 
 import androidx.fragment.app.viewModels
-import com.jay.common.makeLog
 import com.jay.wj_remember.R
 import com.jay.wj_remember.databinding.FragmentLocalBinding
 import com.jay.wj_remember.ui.base.BaseFragment
 import com.jay.wj_remember.ui.main.fragment.UserAdapter
-import com.jay.wj_remember.utils.FragmentType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

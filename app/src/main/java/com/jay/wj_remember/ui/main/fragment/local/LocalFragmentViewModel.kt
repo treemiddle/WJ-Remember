@@ -49,7 +49,7 @@ class LocalFragmentViewModel @Inject constructor(
     }
 
     private fun removeAtIndexFromList(position: Int): List<User> {
-        return createUseCase.removeAtDomainList(
+        return createUseCase.removeUserToNewDomainList(
             userList = _localUserList.value!!.map(Mapper::mapToDomain),
             position = position
         ).map(Mapper::mapToPresentation)

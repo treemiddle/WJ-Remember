@@ -30,16 +30,45 @@ class CreateUseCase {
         return newList
     }
 
-    fun removeAtDomainList(
+    fun removeUserToNewDomainList(userList: List<DomainUser>, position: Int): List<DomainUser> {
+        return removeUser(userList, position)
+    }
+
+    private fun removeUser(userList: List<DomainUser>, position: Int): List<DomainUser> {
+        val newList = mutableListOf<DomainUser>().apply {
+            addAll(userList)
+
+            if (size != 0) {
+                removeAt(position)
+            }
+        }
+
+        return changeHeaderToNextNode(
+            header = userList[position].header,
+            userList = newList,
+            position = position
+        )
+    }
+
+    private fun changeHeaderToNextNode(
+        header: String?,
         userList: List<DomainUser>,
         position: Int
     ): List<DomainUser> {
-        val newList = mutableListOf<DomainUser>().apply {
-            addAll(userList)
-            removeAt(position)
-        }
+        val newList = mutableListOf<DomainUser>().apply { addAll(userList) }
 
-        return newList
+        return if (header.isNullOrEmpty()) {
+            newList
+        } else {
+            val groupList = newList.filter { it.name.startsWith(header) }
+
+            if (groupList.isNotEmpty()) {
+                val node = groupList[0].apply { this.header = header }
+                newList[position] = node
+            }
+
+            newList
+        }
     }
 
 }

@@ -7,9 +7,9 @@
     <application
         android:name=".WJApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/wj_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/wj_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WJRemember">
         <activity
@@ -17,7 +17,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:exported="false"
+            android:exported="true"
             android:noHistory="true" />
         <activity
             android:name=".ui.ColdStartActivity"

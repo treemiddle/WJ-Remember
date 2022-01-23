@@ -5,7 +5,6 @@ import com.jay.wj_remember.model.User
 import com.jay.domain.model.DomainUser as DomainModel
 import com.jay.wj_remember.model.User as PresentationModel
 
-
 object Mapper : PresentationMapper<DomainModel, PresentationModel> {
 
     override fun mapToPresentation(from: DomainUser): User {

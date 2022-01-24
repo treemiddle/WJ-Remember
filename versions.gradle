@@ -31,9 +31,9 @@ ext {
             ],
 
             retrofit           : [
-                    version     : '2.9.0',
                     rx_adapter  : '1.0.0',
-                    convert_gson: '2.9.0'
+                    version     : '2.9.0',
+                    convert_gson: '2.9.0',
             ],
 
             rx                 : [

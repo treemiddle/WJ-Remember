@@ -50,10 +50,14 @@ dependencies {
     kapt remote.hilt.android_compiler
     kapt remote.hilt.hilt_compiler
 
-    api remote.retrofit.version
+    //api remote.retrofit.version
     implementation remote.retrofit.adapter
-    implementation remote.retrofit.gson
+    //implementation remote.retrofit.gson
+    api "com.squareup.retrofit2:retrofit:2.6.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.6.0"
 
-    implementation remote.okhttp.version
-    implementation remote.okhttp.logging
+    //implementation remote.okhttp.version
+    //implementation remote.okhttp.logging
+    implementation "com.squareup.okhttp3:okhttp:3.12.13"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.12.13"
 }

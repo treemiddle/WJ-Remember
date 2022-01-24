@@ -3,7 +3,6 @@ package com.jay.remote
 import com.jay.data.model.DataUser
 import com.jay.data.remote.GithubRemoteDataSource
 import com.jay.remote.api.GithubApi
-import com.jay.remote.exception.composeDomain
 import com.jay.remote.mapper.GithubRemoteMapper
 import com.jay.remote.model.UserInfo
 import io.reactivex.Single
@@ -34,7 +33,7 @@ class GithubRemoteDataSourceImpl @Inject constructor(private val githubApi: Gith
             .map { setHeaderFromLogin(it.items) }
             //.map { setHeaderFromName(it.items) }
             .map { it.map(GithubRemoteMapper::mapToData) }
-            .composeDomain()
+            //.composeDomain()
     }
 
     private fun setHeaderFromLogin(userList: List<UserInfo>?): List<UserInfo> {

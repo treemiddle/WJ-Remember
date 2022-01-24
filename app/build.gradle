@@ -52,21 +52,15 @@ dependencies {
     implementation app.androidx.appcompat
     implementation app.androidx.material
     implementation app.androidx.constraintlayout
-
-    //todo androidx.activity.viewmodels -> versions.gradle로 하면 안나옴(원인 찾아볼 것)
-//    implementation app.androidx.life_cycle_ktx
-//    implementation app.androidx.livedata_ktx
-//    implementation app.androidx.multidex
-//    implementation app.androidx.viewmodel_ktx
-//    implementation app.androidx.fragment_ktx
-//    implementation app.androidx.activity_ktx
     implementation app.androidx.swipe_layout
-
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
-    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation app.androidx.multidex
+    implementation app.androidx.life_cycle_ktx
+    implementation app.androidx.livedata_ktx
+    implementation app.androidx.viewmodel_ktx
+    //implementation app.androidx.activity_ktx
+    //implementation app.androidx.fragment_ktx
     implementation "androidx.activity:activity-ktx:1.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.4.0"
 
     testImplementation app.test.junit
     androidTestImplementation app.test.runner
@@ -82,4 +76,6 @@ dependencies {
     implementation app.rx.java
     implementation app.rx.kotlin
     implementation app.rx.android
+
+    implementation 'org.conscrypt:conscrypt-android:2.5.0'
 }

@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">WJ-Remember</string>
 
-    <string name="splash_about_me">안녕하세요\n안드로이드 개발자 남우중입니다</string>
+    <string name="splash_about_me">Hello\nAndroid Dev.WJ</string>
     <string name="splash_skills">Skills\nKotlin, MVVM, Clean architecture, Multi Module, Retrofit, Hilt, Glide, Room, Rx, Data Binding</string>
 
     <string name="main_title">GitHub Stars</string>
     <string name="main_tab_01">API</string>
-    <string name="main_tab_02">로컬</string>
-    <string name="main_edit_text_hint">검색어를 입력하세요</string>
-
-    <string name="empty_user_list">검색 결과가 없습니다</string>
+    <string name="main_tab_02">LOCAL</string>
+    <string name="main_edit_text_hint">Please enter your query</string>
+    <string name="empty_user_list">No Results</string>
 
 </resources>
